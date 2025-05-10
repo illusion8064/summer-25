@@ -1,8 +1,9 @@
-# summer-25
+# Summer 2025
+[Overleaf Document](https://www.overleaf.com/project/681f24568735d0ac2f85d6eb)
 
-## week 1
-- introduction to risc-v free course
-- fcc's ml intro course
-- system verilog course start
-- cva6 repo cloning + getting started
-- know what pulp is
+## Week-1 Goals
+- Complete introduction to RISC-V free course
+- Start FreeCodeCamp's Machine Learning introduction course
+- Begin SystemVerilog course
+- Clone CVA6 repository and complete getting started guide
+- Research about PULP (Parallel Ultra-Low Power) platform
