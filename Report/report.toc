@@ -1,0 +1,37 @@
+\contentsline {section}{\numberline {1}TinyML}{3}{section.1}%
+\contentsline {section}{\numberline {2}Neural Networks}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Non-Linearity}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Backpropagation}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}PyTorch}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}What are Tensors?}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Concept of seeding}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Autograd}{6}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Basics of OOPS in Python}{7}{subsection.3.4}%
+\contentsline {section}{\numberline {4}RISC-V}{7}{section.4}%
+\contentsline {subsection}{\numberline {4.1}RISC vs. CISC: Instruction Sets and Code Density}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}RISC-V Name}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}RISC-V Instruction Set Variants}{9}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Shakti Processors}{9}{subsection.4.4}%
+\contentsline {subsubsection}{\numberline {4.4.1}Shakti Processor Variants}{9}{subsubsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.5}Vega Processors}{10}{subsection.4.5}%
+\contentsline {subsubsection}{\numberline {4.5.1}Vega Processor Variants}{10}{subsubsection.4.5.1}%
+\contentsline {section}{\numberline {5}SystemVerilog}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}About RTL}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Verilog Vs SystemVerilog}{10}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Data Types}{11}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}2-State Data Types}{12}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Struct Data Type}{12}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Enumerated Data Types}{13}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Fixed Arrays (Packed/Unpacked)}{14}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Dynamic Arrays}{16}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.6}Queue}{18}{subsubsection.5.3.6}%
+\contentsline {subsubsection}{\numberline {5.3.7}Associative Arrays}{18}{subsubsection.5.3.7}%
+\contentsline {subsubsection}{\numberline {5.3.8}Summary}{20}{subsubsection.5.3.8}%
+\contentsline {subsection}{\numberline {5.4}Display Output}{21}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Format Specifiers}{22}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Zero-Padding/Space-Padding}{22}{subsubsection.5.4.2}%
+\contentsline {section}{\numberline {6}CVA6}{22}{section.6}%
+\contentsline {section}{\numberline {7}PULP-TrainLib}{22}{section.7}%
+\contentsline {section}{\numberline {8}UVM}{22}{section.8}%
+\contentsline {section}{\numberline {9}On-Device Training}{22}{section.9}%
+\contentsline {subsubsection}{\numberline {9.0.1}Subsection}{22}{subsubsection.9.0.1}%
