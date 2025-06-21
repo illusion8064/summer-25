@@ -1,7 +1,7 @@
 # Summer 2025
 [Overleaf Document](https://www.overleaf.com/project/681f24568735d0ac2f85d6eb)
 
-## Week-1 Goals
+## Goals
 - Complete introduction to RISC-V free course
 - Start FreeCodeCamp's Machine Learning introduction course
 - Begin SystemVerilog course
