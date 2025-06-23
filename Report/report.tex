@@ -46,6 +46,9 @@
 \usepackage{color, soul}
 \usepackage{xcolor}
 
+\definecolor{lightgrey}{gray}{0.85}
+\sethlcolor{lightgrey} % For highlighting Words
+
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
@@ -1158,7 +1161,43 @@ In SystemVerilog, we can also specify the width of the output and whether to use
 
 \section{CVA6}
 
-References: \href{https://github.com/openhwgroup/cva6}{GitHub Repository}
+References: \href{https://github.com/openhwgroup/cva6}{GitHub Repository} \&
+\href{https://github.com/VedantPahariya/cva6/blob/master/tutorials/running_sim.md}{Setup Tutorial} \& \href{https://cva6.readthedocs.io/en/latest/03_cva6_design/intro.html}{Main Theory}
+
+\vspace{0.5em}
+
+CVA6 stands for CORE-V version of Ariane Core, which is a RISC-V based open-source processor core developed by the OpenHW Group. It is a 6-stage, single-issue, in-order CPU which implements the 64-bit RISC-V instruction set.
+
+\vspace{0.5em}
+
+\textbf{Note:} CVA6 is an in-order processor, which is true in the sense that instruction issue and commit happen in program order. However, its write-back and execution complete out-of-order. Click \href{https://chatgpt.com/s/t_6859b47774988191b23e0e92336e7668}{Here} for details (ChatGPT chat with sources).
+
+\vspace{0.5em}
+
+CVA6 supports I, M, A, and C extensions in RISC-V. \href{https://chatgpt.com/s/t_6859b7c99a1481919e4f0061d34eb39e}{Extracted details from Manual} (GPT) \& \href{https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-118.pdf}{RISC-V Instruction Set Manual}
+
+\vspace{0.5em}
+
+It implements three privilege levels M, S, U to fully support a Unix-like operating system.
+\href{https://chatgpt.com/s/t_6859b8e04be88191863e1d50b57d0f11}{GPT chat} for more details.
+
+\subsection{Setting up CVA6}
+
+To set up CVA6, you need to follow these steps:
+\begin{enumerate}
+    \item Fork the CVA6 repository and then clone from GitHub. \\
+    Don't clone directly from the main repository, as it will not allow you to push changes (contribute back) in the future.
+
+    \item Initialize and update all submodules:
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+    git submodule update --init --recursive
+        \end{lstlisting}
+
+        Running this commmand ensures all submodules inside \hl{.gitmodules} —down to the deepest nested level—are initialized, cloned, and checked out to the exact commit expected by the main project. It's required to build and simulate complex repos like CVA6 smoothly. \href{https://chatgpt.com/s/t_6859c638d5208191bfd8707c9580f31a}{Link}
+        
+\end{enumerate}
+
+
 
 \section{PULP-TrainLib}
 

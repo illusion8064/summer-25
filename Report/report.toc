@@ -38,7 +38,8 @@
 \contentsline {subsubsection}{\numberline {5.4.1}Format Specifiers}{23}{subsubsection.5.4.1}%
 \contentsline {subsubsection}{\numberline {5.4.2}Zero-Padding/Space-Padding}{23}{subsubsection.5.4.2}%
 \contentsline {section}{\numberline {6}CVA6}{24}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Setting up CVA6}{24}{subsection.6.1}%
 \contentsline {section}{\numberline {7}PULP-TrainLib}{24}{section.7}%
 \contentsline {section}{\numberline {8}UVM}{24}{section.8}%
-\contentsline {section}{\numberline {9}On-Device Training}{24}{section.9}%
-\contentsline {subsubsection}{\numberline {9.0.1}Subsection}{24}{subsubsection.9.0.1}%
+\contentsline {section}{\numberline {9}On-Device Training}{25}{section.9}%
+\contentsline {subsubsection}{\numberline {9.0.1}Subsection}{25}{subsubsection.9.0.1}%
