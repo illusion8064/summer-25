@@ -1158,6 +1158,81 @@ In SystemVerilog, we can also specify the width of the output and whether to use
 \end{tabular}
 \end{center}
 
+\subsection{Tasks \& Functions}
+
+In SystemVerilog, tasks and functions are procedural blocks that allows for executing a series of statements. Tasks are particularly useful when you need to group code that performs operations involving multiple inputs/outputs or when your code involves time-consuming operations (such as delays, waiting for an event, etc.). Tasks can be reused by calling them multiple times, helping to make your design more modular and easier to maintain.
+
+Function is a subroutine that encapsulates reusable code and returns a single value. Functions are primarily used to perform calculations or operations that don't require simulation time, meaning they cannot contain any timing controls such as delays or event triggers.
+
+\subsubsection{Enhancements in SystemVerilog:}
+
+\begin{itemize}
+    \item In Verilog, code inside task is guarded by \texttt{begin} and \texttt{end} keywords, while in SystemVerilog, no need to write these keywords.
+    \item Function can only have input arguments in Verilog, while in SystemVerilog, it can have both input, inout and output arguments.
+    \item We can't have void function in Verilog, while in SystemVerilog, we can have void function.
+\end{itemize}
+
+\subsubsection{Types of Tasks}
+
+There are two types of tasks in SystemVerilog:
+\begin{itemize}
+    \item \textbf{Static Tasks:}
+A static task in SystemVerilog is a task that does not maintain any state between invocations and shares its local variables across all calls. Static tasks are instantiated
+once and their variables persist between calls, so changes made to variables in one invocation are visible in other invocations.
+
+When the static task block is invokes/called for the first time, a memory space is allocated for the task and all member variables will be initialized. When it is called again, \ul{the same memory space is used} and the modification will be done in the same variables only.
+
+By default, all tasks in SystemVerilog are static tasks. This means that if you don't specify otherwise, the task will behave as a static task.
+
+\vspace{0.5em}
+    \item \textbf{Automatic Tasks:}
+A automatic task in SystemVerilog is a task that maintains its own state between invocations and does not share its local variables across calls. Automatic tasks are instantiated each time they are called, and their variables are initialized anew for each invocation.
+
+When the automatic task block is invoked/called for the first time, a memory space is allocated for the task and all member variables will be initialized. \ul{The memory space is freed up when the task execution is completed}.
+
+Everytime the automatic task is called, a \ul{new memory space is allocated} for the block of code and all member variables will be initialized again. This means that the automatic tasks does not retain any state between calls.
+
+keyword \texttt{automatic} is used to declare a task as automatic.
+\end{itemize}
+
+\textbf{Important Note:} Static Task is better when the task is never recursive, never called in parallel, and performance is key, since automatic memory allocation has overhead. 
+Automatic Task is preferred in case of multithreaded, or recursive use cases.
+
+\subsubsection{Syntax of Task}
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    firstnumber=1,
+    % nolol=true,
+    title={Static Task Syntax}
+]
+module task_example;
+
+    int a;
+    task increase();
+        a=a+1;
+    endtask
+
+    task automatic increment();
+        int i;
+        i = i+1;
+        $display("The value of a after automatic increment is %0d", i);
+    endtask
+
+    initial begin
+        increase();
+        increment();
+        $display("The value of a after 1st increment is %0d", a);
+        
+        increase();
+        increment();
+        $display("The value of a after 2nd increment is %0d", a);
+    end
+    
+endmodule
+
+\end{lstlisting}
 
 \section{CVA6}
 
