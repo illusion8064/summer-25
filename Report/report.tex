@@ -313,8 +313,6 @@ The data values should be normalized to a range of 0 to 1 or -1 to 1, depending 
 
 \subsubsection{Basics of OOPS in Python}
 
-
-
 Reference: \href{https://www.youtube.com/watch?v=HQnoYzxOHMw}{Video-1} (Intro to OOPS) \href{https://youtu.be/a7baAGCBA9U?si=dic4GqzG0pJtPffX}{Video-2} (Classes \& Objects) \href{https://youtu.be/12HRkYld22c?si=2YsB6D_8Efi1Otr0}{Video-3} (Constructors) \href{https://youtu.be/6soT3DMBJGQ?si=9a_6DyX1GmZFHFg9}{Video-4} (Inheritance) 
 
 \vspace{0.5em}
@@ -333,6 +331,60 @@ Key components of torch.nn include:
     \item \textbf{Optimizers:} Pre-defined optimizers like \texttt{torch.optim.SGD} and \texttt{torch.optim.Adam} for updating model parameters during training.
     \item \textbf{Dropout and Batch Normalization:} Layers like \texttt{nn.Dropout} and \texttt{nn.BatchNorm2d} for regularization and normalization. The \texttt{nn.Dropout} layer is used to prevent overfitting by randomly setting a fraction of input units to zero during training.
 \end{itemize}
+
+\subsection{Dataset \& DataLoader Class}
+
+There are the following problems with the traditional way of loading data in PyTorch:
+\begin{itemize}
+    \item Loading the entire dataset into memory at once can be inefficient and may not fit into memory for large datasets.
+    \item Data augmentation techniques like random cropping, flipping, and rotation are often needed to improve model generalization.
+    \item Shuffling the dataset is important to ensure that the model does not learn any unintended patterns from the order of the data.
+    \item Batching the data with efficient parallelism is necessary to speed up training and make better use of hardware resources.
+\end{itemize}
+
+These problems are addressed by the Dataset and DataLoader classes in PyTorch. The Dataset class is an abstract class that represents a dataset and provides methods for accessing individual data samples. The DataLoader class is responsible for loading data from a Dataset and providing it in batches, with support for shuffling, parallel loading, and data augmentation.
+
+\subsubsection{Dataset Class}
+
+The Dataset class is essentially a blueprint. When we create a custom Dataset, we decide how data is loaded and returned. It defines:
+
+\begin{itemize}[nosep]
+    \item hello
+    \item \texttt{\_\_init\_\_()} method: Initializes the dataset, loads data from files, and performs any necessary preprocessing.
+    \item \texttt{\_\_len\_\_()} method: Returns the total number of samples in the dataset.
+    \item \texttt{\_\_getitem\_\_(index)} method: Returns a single sample from the dataset at the specified index. This is where we can apply data transformations or augmentations.
+\end{itemize}
+
+\begin{lstlisting}[
+    language=Python,
+    backgroundcolor={\color{gray!10}},
+    numbers=none,
+    % nolol=true,
+]
+import torch
+from torch.utils.data import Dataset
+
+class CustomDataset(Dataset):
+    def __init__(self, data, labels, transform=None):
+        self.data = data
+        self.labels = labels
+        self.transform = transform
+
+    def __len__(self):
+        return self.data.shape[0]  # Return the total number of samples
+
+    def __getitem__(self, index):
+        sample = self.data[index]
+        label = self.labels[index]
+        if self.transform:
+            sample = self.transform(sample) # Apply any transformations if provided
+        return sample, label
+\end{lstlisting}
+
+\subsubsection{DataLoader Class}
+
+The DataLoader class is responsible for loading data from a Dataset and providing it in batches. 
+At the start of each epoch, the DataLoader (if shuffle-True) shuffles indices(using a sampler). It divides the indices into chunks of batch size. for each index in the chunk, data samples are fetched from the Dataset object The samples are then collected and combined into a batch (using collate\_fn) The batch is returned to the main training loop
 
 \section{RISC-V}
 
@@ -551,7 +603,7 @@ Following is the syntax for defining a struct in SystemVerilog:
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true
     ]
     // SystemVerilog struct data type
@@ -579,7 +631,7 @@ Unpacked structs, on the other hand, allow for padding and can have variable-siz
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Packed vs Unpacked Structs}
 ]
@@ -603,7 +655,7 @@ Typedef allows us to create new data types based on existing ones. This can help
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Verilog Code using Typedef}
     ]
@@ -620,7 +672,7 @@ Typedef allows us to create new data types based on existing ones. This can help
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Good Example of Packed Struct Usage with Typedef}
 ]
@@ -646,7 +698,7 @@ Enumerated data types allow us to define a set of named values, which can make o
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Enumerated Data Type Example}
 ]
@@ -728,7 +780,7 @@ Here, we have defined a packed array named \texttt{packed\_array} with 4 element
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Assigning Values to Array}
 ]
@@ -751,7 +803,7 @@ To access all elements of an array, we can use a \texttt{foreach} loop in System
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Accessing Array Elements using foreach}
 ]
@@ -774,7 +826,7 @@ To access all elements of an array, we can use a \texttt{foreach} loop in System
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     title={Packed Array Example}
 ]
 module example;
@@ -891,7 +943,7 @@ There are two methods to increase the size of a dynamic array in SystemVerilog:
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Resizing Dynamic Array}
     ]
@@ -1037,7 +1089,7 @@ endmodule
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Example using next()}
 ]
@@ -1172,6 +1224,10 @@ Function is a subroutine that encapsulates reusable code and returns a single va
     \item We can't have void function in Verilog, while in SystemVerilog, we can have void function.
 \end{itemize}
 
+\textbf{Note:} SystemVerilog doesn't always support C-like inline initialization of local variables in task and function blocks — depending on tool and context. So it's safer to split declaration and assignment.
+
+Example: \texttt{ int i = 10 + 20;} inside the task/function block will return i=0.
+
 \subsubsection{Types of Tasks}
 
 There are two types of tasks in SystemVerilog:
@@ -1203,7 +1259,7 @@ Automatic Task is preferred in case of multithreaded, or recursive use cases.
 \begin{lstlisting}[
     language=Verilog,
     backgroundcolor={\color{gray!10}},
-    firstnumber=1,
+    numbers =none,
     % nolol=true,
     title={Static Task Syntax}
 ]
@@ -1216,7 +1272,7 @@ module task_example;
 
     task automatic increment();
         int i;
-        i = i+1;
+        i = i+1; // can't do int i = i+1;
         $display("The value of a after automatic increment is %0d", i);
     endtask
 
@@ -1231,7 +1287,231 @@ module task_example;
     end
     
 endmodule
+\end{lstlisting}
 
+
+\subsubsection{Passing arguments to Tasks}
+
+In SystemVerilog, we can pass arguments to tasks in the following ways:
+\begin{itemize}
+    \item Argument passing by name
+    
+    \begin{lstlisting}[
+        language=Verilog,
+        backgroundcolor={\color{gray!10}},
+        numbers =none,
+        % nolol=true,
+    ]
+    task example_task(int a, int b);
+        $display("The value of a is %0d and b is %0d", a, b);
+    endtask
+    initial begin
+        example_task(.a(5), .b(10)); // Passing arguments by name
+    end
+    \end{lstlisting}
+
+    \item Argument passing by value
+    
+    \begin{lstlisting}[
+        language=Verilog,
+        backgroundcolor={\color{gray!10}},
+        numbers =none,
+        % nolol=true,
+    ]
+    task example_task(int a, int b);
+        $display("The value of a is %0d and b is %0d", a, b);
+    endtask
+    initial begin
+        int x = 5;
+        int y = 10;
+        example_task(x, y); // Passing arguments by value
+    end
+    \end{lstlisting}
+    
+    \item Argument passing by reference
+    
+    Keyword \texttt{ref} is used to pass arguments by reference. This means that the task can modify the original variables passed to it, and those changes will be reflected outside the task. 
+    
+    The task must be declared automatic to use reference arguments. This is because passing by reference implies that the task or function can be re-entrant, meaning it can be called multiple times concurrently (or recursively), and each call needs its own independent set of local variables.
+
+    \begin{lstlisting}[
+        language=Verilog,
+        backgroundcolor={\color{gray!10}},
+        numbers =none,
+        % nolol=true,
+    ]
+    task automatic example_task(ref int a, ref int b);
+        a = a + 1;
+        b = b + 2;
+        $display("The value of a is %0d and b is %0d", a, b);
+    endtask
+
+    initial begin
+        int x = 5;
+        int y = 10;
+        example_task(x, y); // Passing arguments by reference
+        $display("The value of x after task call is %0d and y is %0d", x, y);
+    end
+    \end{lstlisting}
+
+\end{itemize}
+
+\textbf{Default Arguments}
+
+\vspace{0.5em}
+
+In SystemVerilog, we can also specify default values for task arguments. This allows us to call the task without providing all the arguments, and the default values will be used for any missing arguments.
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+    title={Default Arguments in Task}
+]
+module task_example;
+
+    task example_task(int a = 5, int b = 10);
+        $display("The value of a is %0d and b is %0d", a, b);
+    endtask
+
+    initial begin
+        example_task(); // Using default values
+        example_task( , 20); // Using default value for b, leaving blank for a
+        example_task(30, 40); // Using custom values
+    end
+endmodule
+\end{lstlisting}
+
+\subsection{Interface}
+
+In SystemVerilog, an interface is a construct that allows you to group related signals and variables together, providing a way to define a common communication protocol between different modules.
+
+\vspace{0.3em}
+
+Lets say we are using the same set of signals in multiple modules, then instead of declaring the same signals in each module, we can declare them in an interface and use that interface in all the modules. This helps to reduce code duplication and makes the design more modular and easier to maintain.
+
+\subsubsection{Syntax of Interface}
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+    title={Interface Syntax}
+]
+interface my_if();
+  int a;
+  int b;
+endinterface
+
+// Here, I have declared the interface of two signals. This means that if I want to use these signals in any module then I can just create a instance of this inferface and include it directly.
+
+module add(my_if intf);
+  initial begin
+    $display("sum is %0d", intf.a + intf.b);
+  end
+endmodule
+
+module sub(my_if intf);
+  initial begin
+    $display("sum is %0d", intf.a - intf.b);
+  end
+endmodule
+
+module operation;
+  my_if intf();
+  //   my_if is the interface name
+  //  intf is the interface instance
+  
+    initial begin
+        intf.a= 3;
+ 	 	intf.b= 4;
+    end
+
+  add adder(.intf(intf));
+  sub subtrator(.intf(intf));
+endmodule
+\end{lstlisting}
+
+We can pass any argument to the interface instance, it will be helpful in putting conditioning for the inputs signals. For example, if we want the signals to change with clock edge, then we can pass the clock signal to the interface instance and use it in the modules to modify the signals.
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers=none,
+    % nolol=true,
+    title={Interface with Clock Signal}
+]
+interface my_if(input logic clk);
+  logic [7:0] data;
+  logic valid;
+
+  // Clocked process to update data and valid signals
+  always_ff @(posedge clk) begin
+    data <= data + 1; // Increment data on clock edge
+    valid <= (data < 255); // Set valid based on data value
+  end
+endinterface
+
+\end{lstlisting}
+
+\subsubsection{Modports}
+
+Modports (short for module ports) are a feature in SystemVerilog interfaces that allow you to define different access permissions rules (read/write directions) for the signals within the interface. It tells which signals are inputs, outputs, or inouts for a specific module using that interface.
+
+\vspace{0.3em}
+
+When multiple modules connect through the same interface, they may use the interface differently:
+
+\begin{itemize}[nosep]
+    \item One module might need to write to a signal, while another module might only need to read from it.
+    \item One module might drive the signals (output). Another module might read the same signals (input).
+\end{itemize}
+
+\vspace{0.3em}
+
+So, we use modport to define how each module can access the interface signals.
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+    title={Modports in Interface}
+]
+ interface inf();
+     int a;
+     int b;
+     int c;
+     int d;
+     
+     modport master(input a, input b, output c);
+     modport slave(input a, input b, input c, output d);
+ endinterface
+ 
+ module add_two(inf.master infc);
+     assign infc.c = infc.a + infc.b;
+ endmodule
+ 
+ module add_three(inf.slave infc);
+     assign infc.d = infc.a + infc.b + infc.c;
+ endmodule
+ 
+ module example_mud();
+     inf my_inf();
+     
+     initial begin
+         my_inf.a = 1;
+         my_inf.b = 2;
+     end
+     
+     add_two add1(my_inf); // same as add_two add1(.inf (my_inf))
+     add_three add2(my_inf);
+     
+     initial begin
+         #1;
+         $display("The value of a and b is %0d, %0d",my_inf.c, my_inf.d);
+     end
+ endmodule
 \end{lstlisting}
 
 \section{CVA6}
@@ -1239,19 +1519,19 @@ endmodule
 References: \href{https://github.com/openhwgroup/cva6}{GitHub Repository} \&
 \href{https://github.com/VedantPahariya/cva6/blob/master/tutorials/running_sim.md}{Setup Tutorial} \& \href{https://cva6.readthedocs.io/en/latest/03_cva6_design/intro.html}{Main Theory}
 
-\vspace{0.5em}
+\vspace{0.4em}
 
 CVA6 stands for CORE-V version of Ariane Core, which is a RISC-V based open-source processor core developed by the OpenHW Group. It is a 6-stage, single-issue, in-order CPU which implements the 64-bit RISC-V instruction set.
 
-\vspace{0.5em}
+\vspace{0.4em}
 
 \textbf{Note:} CVA6 is an in-order processor, which is true in the sense that instruction issue and commit happen in program order. However, its write-back and execution complete out-of-order. Click \href{https://chatgpt.com/s/t_6859b47774988191b23e0e92336e7668}{Here} for details (ChatGPT chat with sources).
 
-\vspace{0.5em}
+\vspace{0.4em}
 
 CVA6 supports I, M, A, and C extensions in RISC-V. \href{https://chatgpt.com/s/t_6859b7c99a1481919e4f0061d34eb39e}{Extracted details from Manual} (GPT) \& \href{https://www2.eecs.berkeley.edu/Pubs/TechRpts/2016/EECS-2016-118.pdf}{RISC-V Instruction Set Manual}
 
-\vspace{0.5em}
+\vspace{0.4em}
 
 It implements three privilege levels M, S, U to fully support a Unix-like operating system.
 \href{https://chatgpt.com/s/t_6859b8e04be88191863e1d50b57d0f11}{GPT chat} for more details.
@@ -1271,8 +1551,6 @@ To set up CVA6, you need to follow these steps:
         Running this commmand ensures all submodules inside \hl{.gitmodules} —down to the deepest nested level—are initialized, cloned, and checked out to the exact commit expected by the main project. It's required to build and simulate complex repos like CVA6 smoothly. \href{https://chatgpt.com/s/t_6859c638d5208191bfd8707c9580f31a}{Link}
         
 \end{enumerate}
-
-
 
 \section{PULP-TrainLib}
 
