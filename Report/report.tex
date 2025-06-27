@@ -46,7 +46,7 @@
 \usepackage{color, soul}
 \usepackage{xcolor}
 
-\definecolor{lightgrey}{gray}{0.85}
+\definecolor{lightgrey}{gray}{0.92}
 \sethlcolor{lightgrey} % For highlighting Words
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -1544,13 +1544,42 @@ To set up CVA6, you need to follow these steps:
     Don't clone directly from the main repository, as it will not allow you to push changes (contribute back) in the future.
 
     \item Initialize and update all submodules:
+
         \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
     git submodule update --init --recursive
         \end{lstlisting}
 
         Running this commmand ensures all submodules inside \hl{.gitmodules} —down to the deepest nested level—are initialized, cloned, and checked out to the exact commit expected by the main project. It's required to build and simulate complex repos like CVA6 smoothly. \href{https://chatgpt.com/s/t_6859c638d5208191bfd8707c9580f31a}{Link}
+    
+    \item Install cmake using following command:
+
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+    sudo apt install cmake
+    cmake --version
+        \end{lstlisting}
+
+    \item Building the compiler Toolchain (\href{https://chatgpt.com/s/t_685e68ba0bfc81918b7b5a289666f145}{Steps})
         
+        \href{https://chatgpt.com/s/t_685e51d3aca08191a9d3c16adf555498}{Why \& What Toolchain?} 
+
+        Several standard packages are required to build the compiler toolchain. You can install them using the following command:
+
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+    sudo apt-get install autoconf automake autotools-dev curl git libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool bc zlib1g-dev
+        \end{lstlisting}
+
+        Under the \hl{\texttt{cva6/util/toolchain-builder/config}}, we have different toolchain configurations for different RISC-V targets.
+
+        To build the specific toolchain, you can run the following command:
+
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        bash get-toolchain.sh gcc-13.1.0-baremetal
+        \end{lstlisting}
+
+        https://chatgpt.com/share/685e9b22-605c-8005-ad4d-3c5d990b4081
+
 \end{enumerate}
+
 
 \section{PULP-TrainLib}
 
