@@ -304,10 +304,55 @@ Before training a neural network, we need to prepare the data. This involves loa
 
 The data values should be normalized to a range of 0 to 1 or -1 to 1, depending on the activation function used in the neural network. This helps in faster convergence during training.
 
+We use methods from scikit learn for data scaling, such as \texttt{StandardScaler} for standardization. 
+
+\begin{lstlisting}[
+    language=Python,
+    backgroundcolor={\color{gray!10}},
+    numbers = none,
+]
+  from sklearn.preprocessing import StandardScaler
+
+  # Create a StandardScaler object
+  scaler = StandardScaler()
+
+  # Fit the scaler on the training data
+  scaler.fit(X_train)
+
+  # Transform the training and validation data
+  X_train_scaled = scaler.transform(X_train)
+  X_val_scaled = scaler.transform(X_val)
+  # Note: Do not fit the scaler on validation data, only transform it.
+
+  # Convert the scaled data to PyTorch tensors
+  X_train_tensor = torch.tensor(X_train_scaled, dtype=torch.float32)
+  X_val_tensor = torch.tensor(X_val_scaled, dtype=torch.float32)
+
+  # Convert the labels to PyTorch tensors
+  y_train_tensor = torch.tensor(y_train, dtype=torch.long)
+  y_val_tensor = torch.tensor(y_val, dtype=torch.long)
+\end{lstlisting}
+
+While normalizing the data, keep in mind to use the same normalization parameters statistics (mean and standard deviation) for both training and validation datasets. This ensures that the model sees the same scale of data during both training and evaluation. This is done by using the \texttt{fit} method on the training data and then using the \texttt{transform} method on both training and validation data as shown in above code snippet.
 
 \subsubsection{Define the Neural Network}
 
 \subsubsection{Writing Training Pipeline}
+
+From the Autograd section, we know that we need to compute the gradients of the loss function with respect to the model parameters. This is done using the \texttt{backward()} method on the loss tensor as shown below:
+
+\begin{verbatim}
+loss.backward()
+\end{verbatim}
+
+This loss can be computed using a loss function which we can get from the \texttt{torch.nn} module or can be defined explicitly in Neural Network class. 
+
+There are two things we have to keep in mind, 
+
+\begin{itemize}
+    \item To make the gradients zero before the backward pass, we need to call the \texttt{zero\_grad()} method on the model parameters. This is important because PyTorch accumulates gradients by default, and we want to avoid accumulating gradients from previous iterations.
+    \item To turn off the gradient tracking for the model parameters while updating the parameters or running the models for evaluation, we can use the \texttt{torch.no\_grad()} context manager or this is handled by the optimizer itself while using \texttt{optimizer.step()}.
+\end{itemize}
 
 \subsubsection{Evaluation}
 
@@ -348,8 +393,9 @@ These problems are addressed by the Dataset and DataLoader classes in PyTorch. T
 
 The Dataset class is essentially a blueprint. When we create a custom Dataset, we decide how data is loaded and returned. It defines:
 
-\begin{itemize}[nosep]
-    \item hello
+\vspace{-0.6em}
+
+\begin{itemize}[itemsep=0.1em]
     \item \texttt{\_\_init\_\_()} method: Initializes the dataset, loads data from files, and performs any necessary preprocessing.
     \item \texttt{\_\_len\_\_()} method: Returns the total number of samples in the dataset.
     \item \texttt{\_\_getitem\_\_(index)} method: Returns a single sample from the dataset at the specified index. This is where we can apply data transformations or augmentations.
@@ -381,10 +427,36 @@ class CustomDataset(Dataset):
         return sample, label
 \end{lstlisting}
 
+Here, \texttt{data} is the input and \texttt{labels} are the corresponding labels/Output for the input data. The \texttt{transform} parameter is optional and can be used to apply any transformations to the data samples, such as normalization or data augmentation.
+
 \subsubsection{DataLoader Class}
 
 The DataLoader class is responsible for loading data from a Dataset and providing it in batches. 
-At the start of each epoch, the DataLoader (if shuffle-True) shuffles indices(using a sampler). It divides the indices into chunks of batch size. for each index in the chunk, data samples are fetched from the Dataset object The samples are then collected and combined into a batch (using collate\_fn) The batch is returned to the main training loop
+At the start of each epoch, the DataLoader (if shuffle-True) shuffles indices(using a sampler). It divides the indices into chunks of batch size. for each index in the chunk, data samples are fetched from the Dataset object The samples are then collected and combined into a batch (using collate\_fn). The batch is returned to the main training loop.
+
+We don't need to write class for DataLoader, as it is already provided by PyTorch. We can use it directly to load data from our custom Dataset as following:
+
+\begin{lstlisting}[
+    language=Python,
+    backgroundcolor={\color{gray!10}},
+    numbers=none,
+    % nolol=true,
+]
+from torch.utils.data import DataLoader
+    # Create an instance of the custom dataset
+    dataset = CustomDataset(data, labels, transform=transform)
+
+    # Create a DataLoader instance
+    dataloader = DataLoader(dataset, batch_size=32, shuffle=True, num_workers=4)
+
+    for epoch in range(num_epochs):
+        # Iterate through the DataLoader
+        for batch_data, batch_labels in dataloader:
+            # Perform training or evaluation on the batch
+            pass
+\end{lstlisting}
+
+
 
 \section{RISC-V}
 
@@ -1210,6 +1282,20 @@ In SystemVerilog, we can also specify the width of the output and whether to use
 \end{tabular}
 \end{center}
 
+\subsubsection{System Task}
+
+Anything in verilog starting with \texttt{\$} is called a system task. System tasks are used to perform various operations such as displaying output, reading input, and controlling simulation time. Some commonly used system tasks are:
+
+\begin{itemize}
+    \item \texttt{\$display}: Used to display output to the console.
+    \item \texttt{\$write}: Similar to \texttt{\$display}, but does not add a newline at the end of the output.
+    \item \texttt{\$strobe}: 
+    \item \texttt{\$monitor}: Used to monitor changes in signals and display output when a change occurs.
+    \item \texttt{\$finish}: Used to terminate the simulation.
+    \item \texttt{\$stop}: Used to pause the simulation.
+    \item \texttt{\$time}: Returns the current simulation time.
+\end{itemize}
+
 \subsection{Tasks \& Functions}
 
 In SystemVerilog, tasks and functions are procedural blocks that allows for executing a series of statements. Tasks are particularly useful when you need to group code that performs operations involving multiple inputs/outputs or when your code involves time-consuming operations (such as delays, waiting for an event, etc.). Tasks can be reused by calling them multiple times, helping to make your design more modular and easier to maintain.
@@ -1513,6 +1599,99 @@ So, we use modport to define how each module can access the interface signals.
      end
  endmodule
 \end{lstlisting}
+
+\subsection{Blocking \& Non-Blocking Assignments}
+
+In Verilog, there are two types of assignments: blocking and non-blocking.
+
+\begin{itemize}
+    \item \textbf{Blocking assignments} (using the `=` operator) are executed sequentially. The next statement will not execute until the current statement is complete. This is similar to how assignments work in most programming languages.
+    \item \textbf{Non-blocking assignments} (using the `<=` operator) allow the next statement to execute without waiting for the current statement to complete. This is useful in sequential logic, where you want to model flip-flops and other memory elements.
+\end{itemize}
+
+\subsubsection{Delay-Based Timining Control}
+In Verilog, we can use delay-based timing control to specify the time delay for the execution of a statement. This is done using the \texttt{'\#'} symbol followed by the time delay value. This can be done in two ways:
+
+\begin{itemize}
+    \item \textbf{Inter Assignment Delay:} This is used to specify the time delay for the execution of a statement. The statement will be executed after the specified time delay. \ul{The delay value is specified on the left hand side of the expression.}
+    \item \textbf{Intra Assignment Delay:} This is used to specify the time delay for the execution of a statement within a blocking assignment. The RHS to LHS assignment happens after the specified time delay. \ul{The delay value is specified on the right hand side of the assignment operator.}
+\end{itemize}
+
+ For both cases, the delay is specified in time units (e.g., nanoseconds, picoseconds, etc.) which is mentioned in the timescale directive at the top of the Verilog file.
+
+\vspace{0.5em}
+
+\textbf{Example-1:}
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+        title={Delay-Based Timing Control}
+    ]
+        // Inter                     |          // Intra
+     initial begin                   |          initial begin
+        #10 b = 1;                   |              c = #10 a + b;
+        #5 c = 5;                    |              d = #5 3;
+    end                              |          end
+\end{lstlisting}
+
+In the above example, in case of inter assignment delay, the value of \texttt{b} will be assigned after 10 time units, and the value of \texttt{c} will be assigned after 15 time units (10 + 5). In case of intra assignment delay, the value of \texttt{c} will be assigned after 10 time units but the value of \texttt{a + b} will be evaluated at time = 0 only. The value of \texttt{d} will be assigned after 15 time units (10 + 5).
+
+\vspace{1em}
+
+\textbf{Example-2:}
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+        title={Inter Assignment Delay in Non-Blocking Assignments}
+    ]
+        // Case-1        |        // Case-2           |       // Case-3
+     initial begin       |      initial begin         |     initial begin
+        a <= 0;          |          a <= 1;           |        a <= 1;
+        b <= 1;          |          #5 b <= a + 1;    |        b <= #5 a + 1;
+        c <= 2;          |          #10 c <= 3;       |        c <= #10 3;
+        d <= 3;          |          #15 d <= 4;       |        d <= #15 4;
+    end                  |      end                   |     end
+\end{lstlisting}
+
+\textbf{Case-1:}  This is simple non-blocking assignment execution. All the assignments will be executed in parallel and the values of \texttt{a}, \texttt{b}, \texttt{c}, and \texttt{d} will be 0, 1, 2, and 3 respectively at time t = 0. 
+
+\vspace{0.2em}
+
+\textbf{Case-2:}  Even though we are using the non-blocking assignments, this will be executed similar to blocking assignments because of inter assignment delays.
+The assignments to \texttt{b}, \texttt{c}, and \texttt{d} have delays specified. The value of \texttt{b} will be assigned after 5 time units, \texttt{c} after 15 time units, and \texttt{d} after 30 (5+10+15) time units. The values of \texttt{a}, \texttt{b}, \texttt{c}, and \texttt{d} will still be 1, 2, 3, and 4 respectively after the execution of the initial block.
+
+\vspace{0.2em}
+
+\textbf{Case-3:}  In this case, the assignments to \texttt{b}, \texttt{c}, and \texttt{d} have delays specified. The value of \texttt{b} will be assigned after 5 time units, \texttt{c} after 10 time units, and \texttt{d} after 15 time units. However, the values of \texttt{a}, \texttt{b}, \texttt{c}, and \texttt{d} will be 1, 1, 3, and 4 respectively. Here, the value of \texttt{b} is different from Case-2 assigned after 5 time units, but the value of \texttt{a + 1} is evaluated at time t = 0 only. So, at time t=0, the value of \texttt{a} = 0, so the value of \texttt{b} will become 1. 
+
+
+\textbf{Example-3:}
+
+\begin{lstlisting}[
+    language=Verilog,
+    backgroundcolor={\color{gray!10}},
+    numbers =none,
+    % nolol=true,
+        title={Intra Assignment Delay in Non-Blocking Assignments}
+    ]  
+     initial begin  
+        a <= 0;       
+        b <= #5 1;   
+        c = #10 2;   
+        d <= #3 3;
+        e <= #5 4;    
+    end                
+\end{lstlisting}
+
+Here, the value of  \texttt{a}, \texttt{b}, \texttt{c}, will be assigned after 0, 5, 10 time units respectively. The c statement will block the execution of further statements until it is executed completely. So, the value of \texttt{d} and \texttt{e} will be assigned after 13 time units (10 + 3) and 15 time units (10 + 5) respectively.
+
+\subsection{Event Scheduler}
 
 \section{CVA6}
 
