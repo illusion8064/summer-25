@@ -835,6 +835,16 @@ INPUT Images//DataTypes_sum4.png
 INPUT ./Images//DataTypes_sum4.png
 INPUT ./Images//DataTypes_sum4.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1200.tfm
+INPUT ./Images//Verilog_Event_Scheduler.png
+INPUT ./Images//Verilog_Event_Scheduler.png
+INPUT Images//Verilog_Event_Scheduler.png
+INPUT ./Images//Verilog_Event_Scheduler.png
+INPUT ./Images//Verilog_Event_Scheduler.png
+INPUT ./Images//SystemVerilog_Event_Scheduler.png
+INPUT ./Images//SystemVerilog_Event_Scheduler.png
+INPUT Images//SystemVerilog_Event_Scheduler.png
+INPUT ./Images//SystemVerilog_Event_Scheduler.png
+INPUT ./Images//SystemVerilog_Event_Scheduler.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -844,6 +854,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1000.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
@@ -854,6 +865,7 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.pdf
 INPUT report.aux
 INPUT ./report.out
 INPUT ./report.out
+INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1000.600pk
 INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.600pk
 INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk
 INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk

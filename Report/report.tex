@@ -1693,10 +1693,89 @@ Here, the value of  \texttt{a}, \texttt{b}, \texttt{c}, will be assigned after 0
 
 \subsection{Event Scheduler}
 
+\href{http://www.sunburst-design.com/papers/CummingsSNUG2006Boston_SystemVerilog_Events.pdf}{Event Scheduler Paper}
+
+\subsubsection{Simulation Time \& Time Slot}
+
+In SystemVerilog, simulation time is divided into discrete time slots. Each time slot represents a specific point in time during the simulation. 
+Time slot = all events processed at a single simulation time.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Verilog_Event_Scheduler.png}
+    \caption{Event Scheduler in Verilog}
+    \label{fig:event_scheduler}
+\end{figure}
+
+To improve the the racing conditions, SystemVerilog introduces five more evnet regions in each time slot as shown below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{SystemVerilog_Event_Scheduler.png}
+    \caption{Event Scheduler in SystemVerilog}
+    \label{fig:event_scheduler_sv}
+\end{figure}
+
+Simulation time moves in time slots, but within a time slot, a lot happens in steps (Preponed → Active → Inactive → NBA → Observed...).
+
+\vspace{0.5em}
+
+\textbf{Preponed Region}
+
+The Preponed region happens first in a time slot, right after advancing simulation time, before anything else happens.
+
+The Preponed region is read-only, meaning it doesn't change any signal values. Its \ul{main purpose is to capture (sample) signal values} for assertions before any updates or evaluations start.
+
+This allows the testbench to capture the last known values before any design changes are applied.
+
+\vspace{0.5em}
+
+\textbf{Active Events Region}
+
+The principal function of this region is to evaluate and execute all current module activity. There is no role of testbench in this region.
+ 
+\begin{itemize}[nosep]
+    \item Execute all \texttt{module} blocking assignments.
+    \item Evaluate the Right-Hand-Side (RHS) of all nonblocking assignments and schedule updates into the NBA region.
+    \item Execute all \texttt{module} continuous assignments
+    \item Evaluate inputs and update outputs of Verilog primitives.
+    \item Execute the \texttt{\$display} and \texttt{\$finish} commands.
+\end{itemize}
+
+\vspace{0.5em}
+\textbf{Inactive Events Region}
+
+\href{https://chatgpt.com/s/t_6860e9b687108191af38e7e5cd53e6ea}{ChatGPT Chat} for more details.
+
+\vspace{0.5em}
+\textbf{Non-Blocking Assignments (NBA) Region}
+
+The principal function of this region is to execute the updates to the LeftHand-Side (LHS) variables that were scheduled in the Active region for all currently executing nonblocking assignments.
+
+\vspace{0.5em}
+\textbf{Observed Region}
+
+The principal function of this region is to evaluate the concurrent assertions using the values sampled in the Preponed region.
+
+\vspace{0.5em}
+\textbf{Reactive Region Set}
+
+This is a set dual of the corresponding Active regions. The Reactive region is used to run the testbench code, which is not part of the design under test (DUT), allowing the testbench to respond to the design events that happened earlier in the same time slot.
+
+\vspace{0.5em}
+\textbf{Postponed Region}
+
+The principal function of this region is to execute the \texttt{\$strobe} and \texttt{\$monitor} commands that will show the final updated values for the current time slot.
+
 \section{CVA6}
 
-References: \href{https://github.com/openhwgroup/cva6}{GitHub Repository} \&
-\href{https://github.com/VedantPahariya/cva6/blob/master/tutorials/running_sim.md}{Setup Tutorial} \& \href{https://cva6.readthedocs.io/en/latest/03_cva6_design/intro.html}{Main Theory}
+\textbf{References}: \href{https://github.com/openhwgroup/cva6}{GitHub Repository} \&
+\href{https://github.com/VedantPahariya/cva6/blob/master/tutorials/running_sim.md}{Setup Tutorial} 
+
+\textbf{Official Documentations} : \href{https://docs.openhwgroup.org/projects/cva6-user-manual/03_cva6_design/index.html}{CVA6 User Manual} \&
+\href{https://cva6.readthedocs.io/en/latest/03_cva6_design/intro.html}{Main Theory}
+
+\textbf{CVA6 GitHub Lab} : \href{https://github.com/sifferman/labs-with-cva6}{Hands-on-Experience with CVA6}
 
 \vspace{0.4em}
 
@@ -1755,7 +1834,21 @@ To set up CVA6, you need to follow these steps:
         bash get-toolchain.sh gcc-13.1.0-baremetal
         \end{lstlisting}
 
+        The important step here is to set the configuration file 
+        
         https://chatgpt.com/share/685e9b22-605c-8005-ad4d-3c5d990b4081
+
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        export RISCV=$HOME/riscv
+        ./build-toolchain.sh -f gcc-13.1.0-baremetal $RISCV
+        \end{lstlisting}
+
+        To check if it is installed correctly, you can run the following command:
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        $HOME/riscv/bin/riscv-none-elf-gcc --version
+            OR
+        home/vedant/riscv/bin/riscv-none-elf-gcc --version
+        \end{lstlisting}
 
 \end{enumerate}
 

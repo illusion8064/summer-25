@@ -52,9 +52,10 @@
 \contentsline {subsection}{\numberline {5.7}Blocking \& Non-Blocking Assignments}{32}{subsection.5.7}%
 \contentsline {subsubsection}{\numberline {5.7.1}Delay-Based Timining Control}{33}{subsubsection.5.7.1}%
 \contentsline {subsection}{\numberline {5.8}Event Scheduler}{34}{subsection.5.8}%
-\contentsline {section}{\numberline {6}CVA6}{34}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Setting up CVA6}{35}{subsection.6.1}%
-\contentsline {section}{\numberline {7}PULP-TrainLib}{35}{section.7}%
-\contentsline {section}{\numberline {8}UVM}{35}{section.8}%
-\contentsline {section}{\numberline {9}On-Device Training}{36}{section.9}%
-\contentsline {subsubsection}{\numberline {9.0.1}Subsection}{36}{subsubsection.9.0.1}%
+\contentsline {subsubsection}{\numberline {5.8.1}Simulation Time \& Time Slot}{34}{subsubsection.5.8.1}%
+\contentsline {section}{\numberline {6}CVA6}{36}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Setting up CVA6}{37}{subsection.6.1}%
+\contentsline {section}{\numberline {7}PULP-TrainLib}{38}{section.7}%
+\contentsline {section}{\numberline {8}UVM}{38}{section.8}%
+\contentsline {section}{\numberline {9}On-Device Training}{38}{section.9}%
+\contentsline {subsubsection}{\numberline {9.0.1}Subsection}{38}{subsubsection.9.0.1}%
