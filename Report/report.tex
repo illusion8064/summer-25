@@ -257,6 +257,8 @@ The Underscore after zero indicates that the operation is done in-place.
 There is other command \texttt{optimizer.zero\_grad()} which is used to clear the gradients of all model parameters in a single call. This is often used in training loops to reset gradients before the next forward and backward pass.
 This function sets the gradients of all model parameters to zero, ensuring that the next forward and backward pass starts with a clean slate.
 
+\vspace{1em}
+
 \textbf{Stopping the Backpropagation}
 
 After the model is trained, we may want to stop the backpropagation for certain tensors/operations. This can be done in three ways:
@@ -1779,6 +1781,13 @@ The principal function of this region is to execute the \texttt{\$strobe} and \t
 
 \vspace{0.4em}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{CVA6.png}
+    \caption{CVA6 Architecture}
+    \label{fig:cva6_architecture}
+\end{figure}    
+
 CVA6 stands for CORE-V version of Ariane Core, which is a RISC-V based open-source processor core developed by the OpenHW Group. It is a 6-stage, single-issue, in-order CPU which implements the 64-bit RISC-V instruction set.
 
 \vspace{0.4em}
@@ -1801,9 +1810,18 @@ To set up CVA6, you need to follow these steps:
     \item Fork the CVA6 repository and then clone from GitHub. \\
     Don't clone directly from the main repository, as it will not allow you to push changes (contribute back) in the future.
 
+    \item Set upstream for pull the latest update
+
+    \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+    git remote add upstream https://github.com/openhwgroup/cva6.git
+    git remote -v
+        \end{lstlisting}
+
+
+
     \item Initialize and update all submodules:
 
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
     git submodule update --init --recursive
         \end{lstlisting}
 
@@ -1811,7 +1829,7 @@ To set up CVA6, you need to follow these steps:
     
     \item Install cmake using following command:
 
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers =none]
     sudo apt install cmake
     cmake --version
         \end{lstlisting}
@@ -1822,7 +1840,7 @@ To set up CVA6, you need to follow these steps:
 
         Several standard packages are required to build the compiler toolchain. You can install them using the following command:
 
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
     sudo apt-get install autoconf automake autotools-dev curl git libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool bc zlib1g-dev
         \end{lstlisting}
 
@@ -1830,7 +1848,7 @@ To set up CVA6, you need to follow these steps:
 
         To build the specific toolchain, you can run the following command:
 
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
         bash get-toolchain.sh gcc-13.1.0-baremetal
         \end{lstlisting}
 
@@ -1838,20 +1856,387 @@ To set up CVA6, you need to follow these steps:
         
         https://chatgpt.com/share/685e9b22-605c-8005-ad4d-3c5d990b4081
 
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
         export RISCV=$HOME/riscv
+        export NUM_JOBS= 8
         ./build-toolchain.sh -f gcc-13.1.0-baremetal $RISCV
         \end{lstlisting}
 
         To check if it is installed correctly, you can run the following command:
-        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize]
+        \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
         $HOME/riscv/bin/riscv-none-elf-gcc --version
             OR
         home/vedant/riscv/bin/riscv-none-elf-gcc --version
         \end{lstlisting}
 
+\item Installing the Verilator and Spike
+         \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize,numbers = none]
+        export DV_SIMULATORS=veri-testharness,spike
+        
+        bash verif/regress/smoke-tests-cv64a6_imafdc_sv39.sh
+         \end{lstlisting}
+
+        Under CVA6/tools, we can clearly check two folders, spike and verilator-v5.008
+
+        Run this to set them in path:
+        
+         \begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+    export PATH=$(pwd)/tools/verilator-v5.008/bin:$(pwd)/tools/spike/bin:$PATH
+    
+    
+    export PATH=/home/vedant/Desktop/Summer_Project/cva6/tools/spike/bin:$PATH
+    export PATH=/home/vedant/Desktop/Summer_Project/cva6/tools/verilator-v5.008/bin:$PATH
+    verilator --version
+    spike --version
+         \end{lstlisting}
+
+         Then we can check the verilator and spike version.
+
+    \item To run a C program, we can use the following code:
+
+     \begin{lstlisting}[language=bash, 
+ numbers = none, frame=single, basicstyle=\ttfamily\footnotesize]
+
+ source verif/sim/setup-env.sh
+ # run the above command in CVA6 directory
+ 
+cd verif/sim
+
+python3 cva6.py \
+  --target cv64a6_imafdc_sv39 \
+  --iss=veri-testharness \
+  --iss_yaml=cva6.yaml \
+  --c_tests ../tests/custom/hello_world/hello_world.c \
+  --linker=../../config/gen_from_riscv_config/linker/link.ld \
+  --gcc_opts="-static -mcmodel=medany -fvisibility=hidden -nostdlib \
+  -nostartfiles -g ../tests/custom/common/syscalls.c \
+  ../tests/custom/common/crt.S -lgcc \
+  -I../tests/custom/env -I../tests/custom/common"
+  \end{lstlisting}
 \end{enumerate}
 
+ \begin{lstlisting}[language=bash, 
+ numbers = none, frame=single, basicstyle=\ttfamily\footnotesize]
+ 
+export RISCV=$HOME/riscv
+export RISCV_CC=/home/vedant/riscv/bin/riscv-none-elf-gcc
+export SPIKE_PATH=/home/vedant/Desktop/Summer_Project/cva6/tools/spike/bin
+
+\end{lstlisting}
+
+Before running the below commands, run the above lines.
+
+
+
+% Output directory
+ % /home/vedant/Desktop/Summer_Project/cva6/verif/sim/out_2025-06-30
+ 
+For converting .c file into .elf file:
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+  export PATH=$HOME/riscv/bin:$PATH
+  riscv-none-elf-gcc --version
+  riscv-none-elf-gcc -o hello1.elf hello.c 
+  # run this command where hello.c is present
+ \end{lstlisting}
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+
+/home/vedant/riscv/bin/riscv-none-elf-gcc \
+verif/tests/custom/mytest/hello.c \
+-T config/gen_from_riscv_config/linker/link.ld \
+-static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles \
+-g verif/tests/custom/common/syscalls.c verif/tests/custom/common/crt.S -lgcc \
+-Iverif/tests/custom/env -Iverif/tests/custom/common -Iverif/env/p \
+-o verif/sim/out_2025-07-03/directed_tests/hello.elf \
+-march=rv64gc -mabi=lp64
+ \end{lstlisting}
+
+ Run the above command from CVA6 repo
+ 
+ \url{https://chatgpt.com/s/t_6862946b5dbc81919ee5c69cf3d0d9a6}
+
+
+Run all the setup here
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+  export RISCV=$HOME/riscv
+  source setup-env.sh  # run this in CVA6/verif/sim
+  export NUM_JOBS=8
+  export DV_SIMULATORS=veri-testharness,spike
+  
+    python3 cva6.py \
+    --target cv64a6_imafdc_sv39 \
+    --iss=$DV_SIMULATORS \
+    --iss_yaml=cva6.yaml \
+    --c_tests ../tests/custom/hello_world/hello_world.c \
+    --linker=../../config/gen_from_riscv_config/linker/link.ld \
+    --gcc_opts="-static -mcmodel=medany -fvisibility=hidden -nostdlib \
+    -nostartfiles -g ../tests/custom/common/syscalls.c \
+    ../tests/custom/common/crt.S -lgcc \
+    -I../tests/custom/env -I../tests/custom/common"
+
+ \end{lstlisting}
+
+
+For waveform generation, use the following code:
+
+\href{https://github.com/openhwgroup/cva6/blob/e34c5ba68358b26dfe13d0b953e622f2e9f8bebd/tutorials/running_sim.md?plain=1#L91-L123}{GitHub Official Instructions}
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+    export TRACE_FAST=1
+    export TRACE_COMPACT=1
+\end{lstlisting}
+
+\subsection{Scoreboard}
+
+Scoreboard is a hardware structure that tracks which instructions are in-flight (issued but not yet completed), which registers are being written, and which instructions are waiting for data.
+
+Memory (data RAM/cache) accesses can take several cycles. If the CPU waits (stalls) every time it needs data from memory, performance drops. If an instruction is waiting for data (e.g., a load from memory), but there are other instructions that do not depend on that data, the CPU can execute those independent instructions while waiting. This helps in hiding latency.
+
+\subsection{Stages in CVA6}
+
+There are 6 stages in CVA6, which are as follows:
+
+\begin{itemize}
+    \item \textbf{PC generation Stage}: The Program Counter (PC) is generated to point to the next instruction to be executed.
+    \item \textbf{Instruction Fetch Stage}: The instruction is fetched from memory.
+    \item \textbf{Instruction Decode Stage}: The fetched instruction is decoded to determine the operation.
+    \item \textbf{Issue Stage}: The instruction is issued to the appropriate execution unit.
+    \item \textbf{Execute Stage}: The operation is performed (e.g., ALU operations, memory access).
+    \item \textbf{Commit Stage}: The instruction is committed, and the next instruction is fetched.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{CVA6 Stages.png}
+    \caption{Stages in CVA6}
+    \label{fig:cva6_stages}
+\end{figure}
+
+\subsubsection{PC generation Stage}
+
+\vspace{0.5em}
+
+The Instruction Cache (\$I) has 1 cycle access latency on hit while Data Cache (\$D) has longer latency of 3 cycles access latency on hit.
+
+This stage is part of the frontend which includes branch prediction structures like BTB (Branch Target Buffer) and BHT (Branch History Table). The PC is generated based on the current PC value, branch prediction, and instruction fetch. 
+
+\vspace{0.5em}
+
+\textbf{Control and Status Register (CSR)}
+
+These are the special registers which tell the CPU where to jump for special events (errors, OS calls, debug) by providing the addresses for exception/interrupt handling, environment call returns, and debug entry. and where to return after handling them, ensuring correct control flow in all situations (ensuring correct PC selection during exceptional control flow events).
+
+\vspace{0.5em}
+
+\subsubsection{Instruction Fetch Stage}
+
+In this stage, the instruction is fetched from the instruction cache (\$I) based on the generated PC based on the handshake between the Instruction Fetch Unit (IFU) and the Instruction Cache. 
+
+\vspace{0.5em}
+
+The handshake is a classic "valid/ready" protocol:
+\begin{itemize}[nosep]
+    \item The frontend sets \texttt{icache\_dreq\_o.req} high when it wants to fetch an instruction.
+    \item The instruction cache sets \texttt{icache\_dreq\_i.ready} high when it can accept a fetch request.
+    \item Only when both signals are high in the same cycle does the fetch actually happen.
+\end{itemize}
+
+
+\textbf{Frontend wants to fetch:}
+\begin{itemize}[nosep]
+    \item \texttt{instr\_queue\_ready = 1} (queue has space)
+    \item \texttt{halt\_frontend\_i = 0} (not halted)
+    \item[$\rightarrow$] \texttt{icache\_dreq\_o.req = 1}
+\end{itemize}
+
+\textbf{Instruction cache is ready:}
+\begin{itemize}[nosep]
+    \item \texttt{icache\_dreq\_i.ready = 1}
+\end{itemize}
+
+\begin{lstlisting}[language=Verilog, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+assign icache_dreq_o.req = instr_queue_ready & ~halt_frontend_i;
+assign if_ready = icache_dreq_i.ready & instr_queue_ready & ~halt_frontend_i;
+\end{lstlisting}
+
+\begin{itemize}[nosep]
+    \item \texttt{instr\_queue\_ready} ensures the instruction queue can accept new instructions.
+    \item \texttt{halt\_frontend\_i} can block fetching (e.g., during a fence or halt).
+\end{itemize}
+
+\textbf{Fetch occurs:}
+\begin{itemize}[nosep]
+    \item \texttt{if\_ready = 1}
+    \item The PC is updated, and the instruction cache returns the instruction data.
+    \item If either side is not ready, the fetch is stalled until both are ready.
+\end{itemize}
+
+\vspace{0.5em}
+
+\textbf{Why do we need an Instruction Cache and an Instruction Queue?}
+
+\ul{Instruction Cache (I\$)}
+
+It stores recently fetched instructions close to the CPU for fast access and reduces the need to access slow main memory for every instruction fetch.
+
+Memory is much slower than the CPU. The cache bridges this speed gap, allowing the CPU to fetch instructions quickly and keep the pipeline full.
+
+\ul{Instruction Queue}  
+
+It buffers instructions fetched from the cache before they are sent to the decode stage and decouples the fetch stage from the decode/issue stages.
+
+The instruction fetch and decode/issue stages may not always run at the same speed:
+The cache might deliver multiple instructions at once (burst fetch).
+The decode/issue stage might stall (e.g., due to pipeline hazards).
+The queue allows the frontend to keep fetching instructions even if the backend is temporarily stalled, improving throughput and hiding memory/cache latency.
+
+\vspace{0.5em}
+
+\textbf{Branch Prediction}
+
+Branch prediction data in CVA6 consists of:
+\begin{itemize}[nosep]
+    \item \textbf{BTB (Branch Target Buffer):} Remembers the target addresses of recently seen branches.
+    \item \textbf{BHT (Branch History Table):} Remembers the recent outcomes (taken/not taken) of branches, usually using a small counter.
+    \item \textbf{Index:} Subset of bits from the PC used to select (index into) a particular entry in the BTB/BHT tables. It provides the fast lookup into these tables using part of the PC.
+    \item \textbf{Tag:} Subset of higher-order bits from the PC stored with each entry to help distinguish between different branches that might map to the same table entry (to avoid aliasing).
+\end{itemize}
+
+\textbf{Note/Fact:} The last bit(s) of the PC is always zero because when fetching instructions, the hardware fetches in words (32 bits = 4 bytes). This means the PC used for fetching is always aligned to 4 bytes, so the lowest two bits are zero. 
+Even if the instruction is compressed (16 bits), the PC is still aligned to 2 bytes, so the lowest bit is zero.
+
+\subsubsection{Instruction Decode Stage}
+Because of the compressed instructions, this stage gets little complicated. It consists of three main components:
+\begin{itemize}[nosep]
+    \item \textbf{Instruction Re-aligner:} Handles compressed (16-bit) and regular (32-bit) instructions alignment across cache line boundaries.
+    \item \textbf{Compressed Decoder:} raw 32-bit instruction words are transformed into executable control structures called scoreboard entries
+    \item \textbf{Decoder} Contains the CPU's registers, which are used to store intermediate values during execution.
+\end{itemize}
+
+
+\subsection{Model on Hardware}
+
+\href{https://chatgpt.com/share/686529ac-6b08-8005-98f3-5291aa6a2816}{Step by step instruction}
+
+grep is a powerful command-line tool used in Unix-like operating systems, such as Linux and macOS, for searching text files based on patterns. It stands for "global regular expression print". grep searches for lines in files that match a specified pattern (which can be a simple string or a more complex regular expression) and then prints those matching lines to the console.
+
+The RISC-V testing infrastructure (like Spike or the CVA6 test framework) checks the special memory-mapped variable tohost. This value is used to signal success or failure of the program to the simulator.
+When program exits, the runtime writes the return value to tohost. If it is zero means success else failure.
+
+\subsubsection{Tests in CVA6}
+
+There are following tests like:
+
+\begin{itemize}[nosep]
+    \item \textbf{run-asm-tests}: Runs all RISC-V assembly tests (from ci/riscv-asm-tests.list).
+    \item \textbf{run-amo-tests}: Runs atomic memory operation tests.
+    \item \textbf{run-mul-tests}: Runs multiplication instruction tests.
+    \item \textbf{run-fp-tests}: Runs floating-point instruction tests.
+    \item \textbf{run-benchmarks}: Runs benchmark programs.
+\end{itemize}
+
+Each of these targets will simulate a suite of tests using the test lists defined in the ci/ directory.
+
+To run a specific test, you can use the following command:
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers = none]
+   make run-mul-tests
+\end{lstlisting}
+
+\textbf{Log File Format:}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{cva6_log_file.png}
+    \caption{CVA6 Log File Instructions}
+    \label{fig:cva6_log_format}
+\end{figure}
+
+Each instruction is logged in two parts:
+\begin{itemize}
+  \item \textbf{Instruction Decode Line:}
+  \begin{quote}
+    \texttt{core   0: 0x0000000000010000 (0x00100413) li s0, 1}
+  \end{quote}
+  This shows that core 0 executed the instruction \texttt{li s0, 1} at address \texttt{0x0000000000010000} (PC Value), which has 32-bit RISC-V machine code (actual instruction) in Hex (\texttt{0x00100413}) stored at that address.
+
+  \item \textbf{Writeback Line (if register is written):}
+  \begin{quote}
+    \texttt{3 0x0000000000010000 (0x00100413) x 8 0x0000000000000001}
+  \end{quote}
+  Here, the number \texttt{3} indicates Machine mode, register \texttt{x8} was updated with value \texttt{0x1}. PC and Instruction is repeated. There are other modes like \texttt{0} for User mode and \texttt{1} for Supervisor mode. The instruction was executed in Machine Mode, the highest privilege level in RISC-V.
+\end{itemize}
+
+Note: 
+li s0, 1  $\rightarrow$ which is a pseudoinstruction for: addi s0, zero, 1
+
+\subsection{Performance Modelling}
+
+\subsubsection{RVFI Trace}
+
+RVFI (RISC-V Formal Interface) trace is a standardized way to capture and analyze the execution of RISC-V instructions in a simulation environment. It records:
+
+\begin{itemize}[nosep]
+    \item Instruction execution
+    \item Register updates
+    \item Memory accesses
+    \item Program Counter (PC) values
+    \item Timing information
+\end{itemize}
+
+\vspace{0.5em}
+
+\textbf{RVFI Analyser}
+
+This is a script written by copilot to analyse the RVFI trace file generated by the CVA6 simulator. To run the script, You can run the script using the following command:
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
+   python3 rvfi_analyser.py <rvfi_trace_file>
+\end{lstlisting}
+
+Example:
+\begin{lstlisting}[language=bash, frame=single, 
+    basicstyle=\ttfamily, numbers=none]
+python3 rvfi_analyzer.py \
+verif/sim/out_2025-07-02/veri-testharness_sim/hello_world.cv64a6_imafdc_sv39.log
+\end{lstlisting}      
+
+There are four files for analysing log files:
+\begin{itemize}
+    \item \textbf{rvfi\_analyzer.py}: Instruction type distribution, proper log instruction printing
+    \item \textbf{simple\_rvfi\_analyzer.py}: Simple analysis of RVFI traces
+    \item \textbf{perf\_analysis.py}: Subset result of model.py. RVFI analysis for issue=commit=2
+    \item \textbf{demo\_issue\_commit.py}: Issue and Commit width analysis with Hazard and Improvement Analysis. Varies the issue and commit width, put the data for each of them
+    \item \textbf{model.py}: issue/commit matrix
+\end{itemize}
+
+
+\textbf{Complete Execution Flow}
+
+This is python script to completely analyse the instructions
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
+
+python3 complete_execution_flow.py \
+../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log \
+--save-terminal-output terminal_log.txt
+
+\end{lstlisting}
+
+\textbf{Getting the Scoreboard Result\\}
+For printing the scoreboard debug, run the following:
+
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
+
+python3 debug_model.py ../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log
+
+\end{lstlisting}
+
+This will generate the output file \texttt{scoreboard\_debug\_\textless filename\textgreater.log} 
+
+\textbf{Generating the Instructions}
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
+python3 complete_execution_flow.py ../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log --performance --save-terminal-output corrected_test.txt --colors
+\end{lstlisting}
 
 \section{PULP-TrainLib}
 
@@ -1872,7 +2257,7 @@ Reference: \url{https://www.youtube.com/watch?v=ic1UMeuCBA8} \\
 
 \begin{itemize}
     \item \textbf{1}: 
-    \item \textbf{2}:
+    \item \textbf{2}:   
 \end{itemize}
 
 \begin{figure}[h]   % h stands for here, t for top, b for bottom, p for page

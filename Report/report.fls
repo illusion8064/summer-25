@@ -845,6 +845,11 @@ INPUT ./Images//SystemVerilog_Event_Scheduler.png
 INPUT Images//SystemVerilog_Event_Scheduler.png
 INPUT ./Images//SystemVerilog_Event_Scheduler.png
 INPUT ./Images//SystemVerilog_Event_Scheduler.png
+INPUT ./Images//CVA6.png
+INPUT ./Images//CVA6.png
+INPUT Images//CVA6.png
+INPUT ./Images//CVA6.png
+INPUT ./Images//CVA6.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -855,6 +860,16 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tctt1000.tfm
+INPUT ./Images//CVA6 Stages.png
+INPUT ./Images//CVA6 Stages.png
+INPUT Images//CVA6 Stages.png
+INPUT ./Images//CVA6 Stages.png
+INPUT ./Images//CVA6 Stages.png
+INPUT ./Images//cva6_log_file.png
+INPUT ./Images//cva6_log_file.png
+INPUT Images//cva6_log_file.png
+INPUT ./Images//cva6_log_file.png
+INPUT ./Images//cva6_log_file.png
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.tex
@@ -870,6 +885,7 @@ INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.6
 INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk
 INPUT /home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
