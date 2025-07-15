@@ -1,3 +1,4 @@
+```mermaid
 flowchart TD
     %% CVA6 Core
     subgraph "CVA6 Core"
@@ -114,3 +115,4 @@ flowchart TD
     classDef peripheral fill:#FFFF99,stroke:#333,stroke-width:1px
     classDef verification fill:#D3D3D3,stroke:#333,stroke-width:1px
     classDef external fill:#CCCCFF,stroke:#333,stroke-width:1px
+```
