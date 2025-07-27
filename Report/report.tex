@@ -1986,12 +1986,6 @@ For waveform generation, use the following code:
     export TRACE_COMPACT=1
 \end{lstlisting}
 
-\subsection{Scoreboard}
-
-Scoreboard is a hardware structure that tracks which instructions are in-flight (issued but not yet completed), which registers are being written, and which instructions are waiting for data.
-
-Memory (data RAM/cache) accesses can take several cycles. If the CPU waits (stalls) every time it needs data from memory, performance drops. If an instruction is waiting for data (e.g., a load from memory), but there are other instructions that do not depend on that data, the CPU can execute those independent instructions while waiting. This helps in hiding latency.
-
 \subsection{Stages in CVA6}
 
 There are 6 stages in CVA6, which are as follows:
@@ -2007,7 +2001,7 @@ There are 6 stages in CVA6, which are as follows:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{CVA6 Stages.png}
+    \includegraphics[width=0.8\textwidth]{CVA6_Stages.png}
     \caption{Stages in CVA6}
     \label{fig:cva6_stages}
 \end{figure}
@@ -2114,6 +2108,26 @@ Because of the compressed instructions, this stage gets little complicated. It c
 \end{itemize}
 
 
+\subsection{Understanding Spike \& Verilator}
+
+Spike is the official RISC-V instruction set simulator (ISS) developed by UC Berkeley and maintained by the RISC-V community. It is referred as a golden reference software model for RISC-V processors. 
+
+\vspace{0.5em}
+
+\textbf{Note:} It is pre-written C++ code that implements RISC-V instructions functionally. It is not a simulator in the sense of simulating hardware, but rather a software model that executes RISC-V instructions.
+
+\vspace{0.5em}
+
+It executes RISC-V binaries (.ELF) according to the ISA spec.Spike simulates an idealized RISC-V processor that follows only the ISA specification - it doesn't know or care about CVA6's specific design choices.
+
+Spike is like a "reference answer key" for what any RISC-V processor should do functionally, while Verilator shows what YOUR specific CVA6 processor actually does!
+
+\subsection{Scoreboard}
+
+Scoreboard is a hardware structure that tracks which instructions are in-flight (issued but not yet completed), which registers are being written, and which instructions are waiting for data.
+
+Memory (data RAM/cache) accesses can take several cycles. If the CPU waits (stalls) every time it needs data from memory, performance drops. If an instruction is waiting for data (e.g., a load from memory), but there are other instructions that do not depend on that data, the CPU can execute those independent instructions while waiting. This helps in hiding latency.
+
 \subsection{Model on Hardware}
 
 \href{https://chatgpt.com/share/686529ac-6b08-8005-98f3-5291aa6a2816}{Step by step instruction}
@@ -2146,7 +2160,7 @@ To run a specific test, you can use the following command:
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{cva6_log_file.png}
+    \includegraphics[width=0.8\textwidth]{CVA6_log_file.png}
     \caption{CVA6 Log File Instructions}
     \label{fig:cva6_log_format}
 \end{figure}
@@ -2204,7 +2218,7 @@ There are four files for analysing log files:
 \begin{itemize}
     \item \textbf{rvfi\_analyzer.py}: Instruction type distribution, proper log instruction printing
     \item \textbf{simple\_rvfi\_analyzer.py}: Simple analysis of RVFI traces
-    \item \textbf{perf\_analysis.py}: Subset result of model.py. RVFI analysis for issue=commit=2
+    \item \textbf{analysis.py}: Subset result of model.py. RVFI analysis for issue=commit=2
     \item \textbf{demo\_issue\_commit.py}: Issue and Commit width analysis with Hazard and Improvement Analysis. Varies the issue and commit width, put the data for each of them
     \item \textbf{model.py}: issue/commit matrix
 \end{itemize}
@@ -2214,29 +2228,20 @@ There are four files for analysing log files:
 
 This is python script to completely analyse the instructions
 
-\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
-
-python3 complete_execution_flow.py \
-../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log \
---save-terminal-output terminal_log.txt
-
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers=none]
+python3 perf_analysis.py ../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log --performance --save-terminal-output corrected_test.txt --colors
 \end{lstlisting}
 
 \textbf{Getting the Scoreboard Result\\}
 For printing the scoreboard debug, run the following:
 
-\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
-
+\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily\footnotesize, numbers=none]
 python3 debug_model.py ../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log
 
 \end{lstlisting}
 
 This will generate the output file \texttt{scoreboard\_debug\_\textless filename\textgreater.log} 
 
-\textbf{Generating the Instructions}
-\begin{lstlisting}[language=bash, frame=single, basicstyle=\ttfamily, numbers=none]
-python3 complete_execution_flow.py ../verif/sim/out_2025-07-08/veri-testharness_sim/multiply.cv64a6_imafdc_sv39.log --performance --save-terminal-output corrected_test.txt --colors
-\end{lstlisting}
 
 \section{PULP-TrainLib}
 

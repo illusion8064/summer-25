@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.10)  11 JUL 2025 10:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2024.4.10)  25 JUL 2025 16:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -614,7 +614,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 91--102
  []
 
 [3]
-<Images//Linear Activation.png, id=379, 989.19562pt x 673.76718pt>
+<Images//Linear Activation.png, id=384, 989.19562pt x 673.76718pt>
 File: Images//Linear Activation.png Graphic file (type png)
 <use Images//Linear Activation.png>
 Package pdftex.def Info: Images//Linear Activation.png  used on input line 153.
@@ -691,29 +691,29 @@ LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 8
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
 File: ts1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) [19]
-<Images//Packed_Output.png, id=629, 809.27344pt x 277.035pt>
+<Images//Packed_Output.png, id=634, 809.27344pt x 277.035pt>
 File: Images//Packed_Output.png Graphic file (type png)
 <use Images//Packed_Output.png>
 Package pdftex.def Info: Images//Packed_Output.png  used on input line 931.
 (pdftex.def)             Requested size: 424.06033pt x 145.16655pt.
  [20 <./Images//Packed_Output.png>] [21] [22] [23]
-<Images//DataTypes_sum1.png, id=694, 971.88094pt x 624.08156pt>
+<Images//DataTypes_sum1.png, id=699, 971.88094pt x 624.08156pt>
 File: Images//DataTypes_sum1.png Graphic file (type png)
 <use Images//DataTypes_sum1.png>
 Package pdftex.def Info: Images//DataTypes_sum1.png  used on input line 1199.
 (pdftex.def)             Requested size: 339.24956pt x 217.8414pt.
-<Images//DataTypes_sum2.png, id=695, 853.68938pt x 508.90125pt>
+<Images//DataTypes_sum2.png, id=700, 853.68938pt x 508.90125pt>
 File: Images//DataTypes_sum2.png Graphic file (type png)
 <use Images//DataTypes_sum2.png>
 Package pdftex.def Info: Images//DataTypes_sum2.png  used on input line 1206.
 (pdftex.def)             Requested size: 339.24956pt x 202.2368pt.
-<Images//DataTypes_sum3.png, id=696, 781.41937pt x 445.665pt>
+<Images//DataTypes_sum3.png, id=701, 781.41937pt x 445.665pt>
 File: Images//DataTypes_sum3.png Graphic file (type png)
 <use Images//DataTypes_sum3.png>
 Package pdftex.def Info: Images//DataTypes_sum3.png  used on input line 1213.
 (pdftex.def)             Requested size: 339.24956pt x 193.48189pt.
  [24 <./Images//DataTypes_sum1.png>]
-<Images//DataTypes_sum4.png, id=712, 732.48656pt x 417.05812pt>
+<Images//DataTypes_sum4.png, id=717, 732.48656pt x 417.05812pt>
 File: Images//DataTypes_sum4.png Graphic file (type png)
 <use Images//DataTypes_sum4.png>
 Package pdftex.def Info: Images//DataTypes_sum4.png  used on input line 1220.
@@ -743,13 +743,13 @@ Overfull \hbox (28.57596pt too wide) in paragraph at lines 1272--1285
  []
 
 [26] [27] [28] [29] [30] [31] [32] [33]
-<Images//Verilog_Event_Scheduler.png, id=919, 680.5425pt x 508.90125pt>
+<Images//Verilog_Event_Scheduler.png, id=924, 680.5425pt x 508.90125pt>
 File: Images//Verilog_Event_Scheduler.png Graphic file (type png)
 <use Images//Verilog_Event_Scheduler.png>
 Package pdftex.def Info: Images//Verilog_Event_Scheduler.png  used on input line 1707.
 (pdftex.def)             Requested size: 339.24956pt x 253.68901pt.
  [34]
-<Images//SystemVerilog_Event_Scheduler.png, id=932, 594.72188pt x 437.38406pt>
+<Images//SystemVerilog_Event_Scheduler.png, id=937, 594.72188pt x 437.38406pt>
 File: Images//SystemVerilog_Event_Scheduler.png Graphic file (type png)
 <use Images//SystemVerilog_Event_Scheduler.png>
 Package pdftex.def Info: Images//SystemVerilog_Event_Scheduler.png  used on input line 1716.
@@ -767,7 +767,7 @@ Overfull \hbox (3.91312pt too wide) in paragraph at lines 1741--1742
 []\OT1/cmr/m/n/12 Evaluate the Right-Hand-Side (RHS) of all non-block-ing as-sign-ments and sched-
  []
 
-<Images//CVA6.png, id=947, 1575.8875pt x 1165.35374pt>
+<Images//CVA6.png, id=952, 1575.8875pt x 1165.35374pt>
 File: Images//CVA6.png Graphic file (type png)
 <use Images//CVA6.png>
 Package pdftex.def Info: Images//CVA6.png  used on input line 1786.
@@ -793,109 +793,100 @@ Overfull \hbox (53.70921pt too wide) in paragraph at lines 1888--1889
 [][][][][][][][][][][][][][][][][][][][][][]  
  []
 
-[39] [40]
-<Images//CVA6 Stages.png, id=1078, 1855.93375pt x 696.6025pt>
-File: Images//CVA6 Stages.png Graphic file (type png)
-<use Images//CVA6 Stages.png>
-Package pdftex.def Info: Images//CVA6 Stages.png  used on input line 2010.
+[39]
+<Images//CVA6_Stages.png, id=1054, 1855.93375pt x 696.6025pt>
+File: Images//CVA6_Stages.png Graphic file (type png)
+<use Images//CVA6_Stages.png>
+Package pdftex.def Info: Images//CVA6_Stages.png  used on input line 2004.
 (pdftex.def)             Requested size: 339.24956pt x 127.32819pt.
- [41pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.2041     \item O
-                  nly when both signals are high in the same cycle does the ... <./Images//CVA6 Stages.png>] [42]
-Overfull \hbox (2.83482pt too wide) in paragraph at lines 2131--2132
-[]\OT1/cmr/bx/n/12 run-asm-tests\OT1/cmr/m/n/12 : Runs all RISC-V as-sem-bly tests (from ci/riscv-asm-tests.list). 
- []
 
-<Images//cva6_log_file.png, id=1093, 816.04875pt x 292.09125pt>
-File: Images//cva6_log_file.png Graphic file (type png)
-<use Images//cva6_log_file.png>
-Package pdftex.def Info: Images//cva6_log_file.png  used on input line 2149.
-(pdftex.def)             Requested size: 339.24956pt x 121.42953pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[43]
-Overfull \hbox (60.65582pt too wide) in paragraph at lines 2160--2161
+[40] [41pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2054 \end{lstlisting}
+                        <./Images//CVA6_Stages.png>] [42] [43]
+Overfull \hbox (2.83482pt too wide) in paragraph at lines 2145--2146
+[]\OT1/cmr/bx/n/12 run-asm-tests\OT1/cmr/m/n/12 : Runs all RISC-V as-sem-bly tests (from ci/riscv-asm-tests.list). 
+ []
+
+<Images//CVA6_log_file.png, id=1103, 816.04875pt x 292.09125pt>
+File: Images//CVA6_log_file.png Graphic file (type png)
+<use Images//CVA6_log_file.png>
+Package pdftex.def Info: Images//CVA6_log_file.png  used on input line 2163.
+(pdftex.def)             Requested size: 339.24956pt x 121.42953pt.
+
+Overfull \hbox (60.65582pt too wide) in paragraph at lines 2174--2175
 \OT1/cmr/m/n/12 This shows that core 0 ex-e-cuted the in-struc-tion \OT1/cmtt/m/n/12 li s0, 1 \OT1/cmr/m/n/12 at ad-dress \OT1/cmtt/m/n/12 0x0000000000010000
  []
 
 
-Overfull \hbox (2.8139pt too wide) in paragraph at lines 2164--2165
+Overfull \hbox (2.8139pt too wide) in paragraph at lines 2178--2179
 []\OT1/cmtt/m/n/12 3 0x0000000000010000 (0x00100413) x 8 0x0000000000000001 
  []
 
 [44pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2199 python3 
-               rvfi_analyzer.py \ <./Images//cva6_log_file.png>]
-Overfull \hbox (69.93991pt too wide) in paragraph at lines 2200--2201
+l.2193     \item I
+                  nstruction execution <./Images/cva6_log_file.png>]
+Overfull \hbox (69.93991pt too wide) in paragraph at lines 2214--2215
 [][][][][][][][][][][][][][][][][][]  
  []
 
 
-Overfull \hbox (16.75684pt too wide) in paragraph at lines 2207--2208
-[]\OT1/cmr/bx/n/12 perf[]analysis.py\OT1/cmr/m/n/12 : Sub-set re-sult of model.py. RVFI anal-y-sis for is-sue=commit=2 
- []
-
-
-Overfull \hbox (76.11491pt too wide) in paragraph at lines 2220--2221
-[][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (89.93991pt too wide) in paragraph at lines 2230--2232
-[][][][][][][][][][][][][][][][][]  
- []
-
-LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 2234.
-LaTeX Font Info:    No file OMLcmtt.fd. on input line 2234.
-
-LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
-(Font)              using `OML/cmm/m/it' instead
-(Font)              for symbol `textless' on input line 2234.
-
-
-Overfull \hbox (96.11491pt too wide) in paragraph at lines 2238--2239
+Overfull \hbox (21.18596pt too wide) in paragraph at lines 2232--2233
 [][][][][][][][][][][][][][][][][][] 
  []
 
 
+Overfull \hbox (15.936pt too wide) in paragraph at lines 2239--2241
+[][][][][][][][][][][][][][][][][]  
+ []
+
+LaTeX Font Info:    Trying to load font information for OML+cmtt on input line 2243.
+LaTeX Font Info:    No file OMLcmtt.fd. on input line 2243.
+
+LaTeX Font Warning: Font shape `OML/cmtt/m/n' undefined
+(Font)              using `OML/cmm/m/it' instead
+(Font)              for symbol `textless' on input line 2243.
+
+[45]
+
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 2250.
+(hyperref)                than one, level fixed on input line 2255.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2252--2253
+Underfull \hbox (badness 10000) in paragraph at lines 2257--2258
 
  []
 
-[45]
-<example-image-a.pdf, id=1131, 321.2pt x 240.9pt>
+<example-image-a.pdf, id=1130, 321.2pt x 240.9pt>
 File: example-image-a.pdf Graphic file (type pdf)
 <use example-image-a.pdf>
-Package pdftex.def Info: example-image-a.pdf  used on input line 2265.
+Package pdftex.def Info: example-image-a.pdf  used on input line 2270.
 (pdftex.def)             Requested size: 275.63663pt x 206.73253pt.
 
-Overfull \hbox (39.23317pt too wide) in paragraph at lines 2270--2274
+Overfull \hbox (39.23317pt too wide) in paragraph at lines 2275--2279
 \OT1/cmr/m/n/12 The term ``mod-ule'' refers to the text en-closed by the key-word pair \OT1/cmr/bx/n/12 mod-ule \OT1/cmr/m/n/12 ...\OT1/cmr/bx/n/12 endmodule\OT1/cmr/m/n/12 .
  []
 
 
-Overfull \hbox (4.57004pt too wide) in paragraph at lines 2270--2274
+Overfull \hbox (4.57004pt too wide) in paragraph at lines 2275--2279
 \OT1/cmr/m/n/12 Keyword ``mod-ule'' is fol-lowed by the $[]$ (ABC here) and |   []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 2270--2274
+Underfull \hbox (badness 10000) in paragraph at lines 2275--2279
 
  []
 
 [46pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.2275 \end{document}
+l.2280 \end{document}
                       </usr/share/texlive/texmf-dist/tex/latex/mwe/example-image-a.pdf>] (./report.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -904,21 +895,21 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 73854428653A3D4BACE612A7881D2699;10725.
+(rerunfilecheck)             Checksum: B575132CBC12D6700FC0F488571F32A3;10950.
  ) 
 Here is how much of TeX's memory you used:
- 23038 strings out of 480247
- 418491 string characters out of 5896151
+ 23033 strings out of 480247
+ 418403 string characters out of 5896151
  932822 words of memory out of 5000000
  39989 multiletter control sequences out of 15000+600000
  477227 words of font info for 56 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,8n,89p,683b,1904s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1000.600pk> </home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1200.600pk> </home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tctt1095.600pk> </home/vedant/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/public/lm/lmss17.pfb>
-Output written on report.pdf (46 pages, 1920734 bytes).
+Output written on report.pdf (46 pages, 1921213 bytes).
 PDF statistics:
- 1334 PDF objects out of 1440 (max. 8388607)
- 1225 compressed objects within 13 object streams
- 621 named destinations out of 1000 (max. 500000)
- 633 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1332 PDF objects out of 1440 (max. 8388607)
+ 1223 compressed objects within 13 object streams
+ 616 named destinations out of 1000 (max. 500000)
+ 641 words of extra memory for PDF output out of 10000 (max. 10000000)
 

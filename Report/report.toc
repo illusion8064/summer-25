@@ -55,16 +55,17 @@
 \contentsline {subsubsection}{\numberline {5.8.1}Simulation Time \& Time Slot}{34}{subsubsection.5.8.1}%
 \contentsline {section}{\numberline {6}CVA6}{36}{section.6}%
 \contentsline {subsection}{\numberline {6.1}Setting up CVA6}{37}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Scoreboard}{40}{subsection.6.2}%
-\contentsline {subsection}{\numberline {6.3}Stages in CVA6}{40}{subsection.6.3}%
-\contentsline {subsubsection}{\numberline {6.3.1}PC generation Stage}{41}{subsubsection.6.3.1}%
-\contentsline {subsubsection}{\numberline {6.3.2}Instruction Fetch Stage}{41}{subsubsection.6.3.2}%
-\contentsline {subsubsection}{\numberline {6.3.3}Instruction Decode Stage}{43}{subsubsection.6.3.3}%
-\contentsline {subsection}{\numberline {6.4}Model on Hardware}{43}{subsection.6.4}%
-\contentsline {subsubsection}{\numberline {6.4.1}Tests in CVA6}{43}{subsubsection.6.4.1}%
-\contentsline {subsection}{\numberline {6.5}Performance Modelling}{44}{subsection.6.5}%
-\contentsline {subsubsection}{\numberline {6.5.1}RVFI Trace}{44}{subsubsection.6.5.1}%
-\contentsline {section}{\numberline {7}PULP-TrainLib}{45}{section.7}%
-\contentsline {section}{\numberline {8}UVM}{45}{section.8}%
+\contentsline {subsection}{\numberline {6.2}Stages in CVA6}{40}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}PC generation Stage}{41}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Instruction Fetch Stage}{41}{subsubsection.6.2.2}%
+\contentsline {subsubsection}{\numberline {6.2.3}Instruction Decode Stage}{42}{subsubsection.6.2.3}%
+\contentsline {subsection}{\numberline {6.3}Understanding Spike \& Verilator}{43}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Scoreboard}{43}{subsection.6.4}%
+\contentsline {subsection}{\numberline {6.5}Model on Hardware}{43}{subsection.6.5}%
+\contentsline {subsubsection}{\numberline {6.5.1}Tests in CVA6}{44}{subsubsection.6.5.1}%
+\contentsline {subsection}{\numberline {6.6}Performance Modelling}{45}{subsection.6.6}%
+\contentsline {subsubsection}{\numberline {6.6.1}RVFI Trace}{45}{subsubsection.6.6.1}%
+\contentsline {section}{\numberline {7}PULP-TrainLib}{46}{section.7}%
+\contentsline {section}{\numberline {8}UVM}{46}{section.8}%
 \contentsline {section}{\numberline {9}On-Device Training}{46}{section.9}%
 \contentsline {subsubsection}{\numberline {9.0.1}Subsection}{46}{subsubsection.9.0.1}%
