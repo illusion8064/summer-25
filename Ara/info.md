@@ -1,8 +1,15 @@
+# Vector Processing 
+
+**Wikipedia Page:** https://en.wikipedia.org/wiki/Vector_processor#cite_ref-21
+
 # Ara
 
-**GitHub Repository:** https://github.com/pulp-platform/ara
+**GitHub Repository:** https://github.com/pulp-platform/ara  
+**Official Documentation:** https://pulp-platform.github.io/ara/
 
 Ara is a RISC-V vector unit developed by the PULP project.
+
+There is some [this](https://chipyard.readthedocs.io/en/1.12.3/Generators/Ara.html) other doc of chipyard, which tells about some configuration in [file](https://github.com/ucb-bar/chipyard/blob/1.12.3/generators/chipyard/src/main/scala/config/AraConfigs.scala).
 
 ## Research Paper Links
 

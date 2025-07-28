@@ -84,6 +84,30 @@ flowchart TB
     Cheshire -->|uses| Benchmarks
     Patches -->|apply| AraTop
 
+    %% Click Events
+    click Dispatcher "https://github.com/pulp-platform/ara/blob/main/hardware/src/ara_dispatcher.sv"
+    click Sequencer "https://github.com/pulp-platform/ara/blob/main/hardware/src/ara_sequencer.sv"
+    click AraTop "https://github.com/pulp-platform/ara/blob/main/hardware/src/ara.sv"
+    click AXI_IF "https://github.com/pulp-platform/ara/blob/main/hardware/src/axi_inval_filter.sv"
+    click Lanes "https://github.com/pulp-platform/ara/tree/main/hardware/src/lane/"
+    click MaskU "https://github.com/pulp-platform/ara/tree/main/hardware/src/masku/"
+    click SLDU "https://github.com/pulp-platform/ara/tree/main/hardware/src/sldu/"
+    click VLSU "https://github.com/pulp-platform/ara/tree/main/hardware/src/vlsu/"
+    click CVA6 "https://github.com/pulp-platform/ara/tree/main/cheshire/"
+    click VerilatorHarness "https://github.com/pulp-platform/ara/blob/main/hardware/tb/verilator/ara_tb.cpp"
+    click Spyglass "https://github.com/pulp-platform/ara/tree/main/hardware/spyglass/"
+    click Benchmarks "https://github.com/pulp-platform/ara/tree/main/apps/"
+    click ConfigMgr "https://github.com/pulp-platform/ara/tree/main/config/"
+    click Makeflow "https://github.com/pulp-platform/ara/tree/main/Makefile"
+    click LLVM "https://github.com/pulp-platform/ara/tree/main/toolchain/riscv-llvm/"
+    click Spike "https://github.com/pulp-platform/ara/tree/main/toolchain/riscv-isa-sim/"
+    click Verilator_tc "https://github.com/pulp-platform/ara/tree/main/toolchain/verilator/"
+    click Scripts "https://github.com/pulp-platform/ara/tree/main/scripts/"
+    click Cheshire "https://github.com/pulp-platform/ara/tree/main/cheshire/"
+    click CI "https://github.com/pulp-platform/ara/blob/main/.github/workflows/ci.yml"
+    click Patches "https://github.com/pulp-platform/ara/tree/main/patches/"
+    click TB "https://github.com/pulp-platform/ara/tree/main/hardware/tb/"
+
     %% Styles
     classDef hardware fill:#E0F0FF,stroke:#0066CC
     classDef software fill:#E0FFE0,stroke:#00AA00
