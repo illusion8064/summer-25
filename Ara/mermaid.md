@@ -108,10 +108,10 @@ flowchart TB
     click Patches "https://github.com/pulp-platform/ara/tree/main/patches/"
     click TB "https://github.com/pulp-platform/ara/tree/main/hardware/tb/"
 
-    %% Styles
-    classDef hardware fill:#E0F0FF,stroke:#0066CC
-    classDef software fill:#E0FFE0,stroke:#00AA00
-    classDef sim fill:#FFF0D0,stroke:#FF8800
-    classDef fpga fill:#F0E0FF,stroke:#8800FF
-    classDef external fill:#F0F0F0,stroke:#999999
+    %% Enhanced Color Styles
+    classDef hardware fill:#4A90E2,stroke:#2E5C8A,stroke-width:2px,color:#000000
+    classDef software fill:#7ED321,stroke:#5BA617,stroke-width:2px,color:#000000
+    classDef sim fill:#F5A623,stroke:#C7851A,stroke-width:2px,color:#000000
+    classDef fpga fill:#9013FE,stroke:#6A0DAD,stroke-width:2px,color:#000000
+    classDef external fill:#50E3C2,stroke:#3BA896,stroke-width:2px,color:#000000
 ```
