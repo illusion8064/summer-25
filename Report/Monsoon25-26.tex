@@ -1,0 +1,160 @@
+\documentclass[12pt, a4paper]{article}
+% There are different classes like:
+% 1) article : for papers and reports
+% 2) book : for books
+% 3) letter: for letters
+% 12pt (default 10pt) defines the fontsize for the whole article.
+% letterpaper (default) defines the size of the paper, a4paper can also be used.
+
+\usepackage{graphicx}
+% latex package to import graphics for pictures
+
+\usepackage{enumitem}
+\usepackage{parskip}
+
+\usepackage{hyperref}
+% For hyperlinks
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+\usepackage{geometry}
+% Page setup
+\geometry{margin=1.2in}
+\setlength{\parindent}{0pt}  % No paragraph indentation
+\setlength{\parskip}{0.5em}  % Paragraph spacing
+
+
+\usepackage{multicol}
+% For multiple columns 
+
+\usepackage[normalem]{ulem}
+% For underline
+\graphicspath{{Images/}}
+% defining the path for images folder
+
+\usepackage{tikz}
+% For making curved arrows
+\usepackage{float}
+
+% Coding Template in Latex
+\usepackage{listings}
+\usepackage{color, soul}
+\usepackage{xcolor}
+
+\definecolor{lightgrey}{gray}{0.92}
+\sethlcolor{lightgrey} % For highlighting Words
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{grey}{rgb}{0.9,1,0.9}
+
+\lstset{frame=tb,
+  language=Verilog,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  backgroundcolor=\color{white},
+  tabsize=3
+}
+% Can change the language using \lstset{language=Java}
+% Coding Template ends here
+
+\title{Honours Project Report}
+\author{\\[-5ex] Vedant Pahariya | Priyanshi Jain}
+\vspace{-5em}
+\date{July -- December 2025}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Ara}
+
+\subsection{Literature Review}
+
+In the following sections, we study about the Ara vector coprocessor and its research papers.
+
+\subsection{About Vector Processor}
+
+\subsubsection{Why we need it?}
+
+To tackle the Von Neumann Bottleneck (VNB), referred as the slowdown caused by limited bandwidth between memory and CPU, which restricts how fast instructions and data can be fetched, especially in data-intensive tasks.
+
+By using the vector processors, we can reduce the number of instructions needed to perform operations on large datasets, thereby improving performance and efficiency.
+
+\begin{quote}
+A scalar processor fetches one instruction, processes one data point.\\
+A vector processor fetches one instruction, but processes many data points.
+\end{quote}
+
+\subsubsection{What is a vector processor?}
+
+A vector processor is a CPU that executes one instruction on an entire array (vector) of data simultaneously, making it ideal for data-parallel tasks like scientific computing and AI, where it improves both speed and energy efficiency by reducing instruction overhead and maximizing hardware usage.
+
+\textbf{Note}: Vector processors do not directly increase memory bandwidth or change shared path. They just reduce pressure on memory bandwidth by doing more work per instruction and organizing memory accesses more efficiently.  
+
+\subsection{SIMT vs SIMD}
+
+\subsubsection{Understanding Thread}
+A thread is just \ul{a sequence of instructions that the CPU runs} like a mini program. If you run the same code twice at the same time with different inputs, it means two threads.
+
+So when your program runs in parallel, it spawns multiple threads — each has its own instructions, registers, and data, and the hardware runs them in parallel (or sometimes interleaved). 
+Single Instruction, Multiple Threads (SIMT) is a thread level implementation. \ul{SIMT = many threads, all run the same instruction at the same time but on different data.}
+
+SIMT and SIMD can (and do) coexist in the same system. In fact, that’s how most modern GPUs work.
+
+SIMD is hardware-level, strict parallelism. All lanes do the same thing at the same time. \\
+SIMT is thread-level. Threads run in parallel but can behave differently, though better performance comes if they stay in sync.
+
+
+\textit{Why do all GPUs Use SIMT - Isn't SIMT Slow With Branching?}
+
+Refer this \href{https://youtu.be/Hf428-u0yFU?si=Y1giRxgAH1q8uhFk}{Youtube Video} and its \href{https://keasigmadelta.com/blog/why-do-gpus-use-simt-isnt-simt-slow-with-branching/}{Doc}
+
+\subsection{Structure of Ara}
+
+% Basic Latex Template
+\subsubsection{Basic Latex Template}
+
+Introduce about the \underline{Title} here. \\
+
+% Here is the way to attach the links in the document
+Reference: \url{https://www.youtube.com/watch?v=ic1UMeuCBA8} \\
+\href{https://www.geeksforgeeks.org/difference-between-gate-level-and-structural-verilog-hdl/}{GeeksforGeeks}
+
+\begin{itemize}
+    \item \textbf{1}: 
+    \item \textbf{2}:   
+\end{itemize}
+
+\begin{figure}[H]   % h stands for here, t for top, b for bottom, p for page
+    \centering
+    \includegraphics[width=0.65\textwidth]{example-image-a} % width is in fraction of textwidth
+    \caption{Sample Image}% Caption of the image
+    \label{fig:veri1}
+\end{figure}
+
+Verilog is a \underline{Case Sensitive} language. \\
+The term ``module'' refers to the text enclosed by the keyword pair \textbf{module} \ldots \textbf{endmodule}. Module is the fundamental descriptive unit in Verilog language. \\
+Keyword ``module'' is followed by the \underline{name of the design} (ABC here) and \uline{parenthesis - enclosed list of ports}.\\
+% uline works better than underline when the text is being wrapped and going in the next line. 
+
+
+\end{document}

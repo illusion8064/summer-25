@@ -6,6 +6,9 @@
 % 12pt (default 10pt) defines the fontsize for the whole article.
 % letterpaper (default) defines the size of the paper, a4paper can also be used.
 
+\usepackage{multirow}
+\usepackage{multicol}
+
 \usepackage{graphicx}
 % latex package to import graphics for pictures
 
@@ -496,8 +499,6 @@ from torch.utils.data import DataLoader
             # Perform training or evaluation on the batch
             pass
 \end{lstlisting}
-
-
 
 \section{RISC-V}
 
@@ -2145,6 +2146,10 @@ Because of the compressed instructions, this stage gets little complicated. It c
     \item \textbf{Compressed Decoder:} raw 32-bit instruction words are transformed into executable control structures called scoreboard entries
     \item \textbf{Decoder} Contains the CPU's registers, which are used to store intermediate values during execution.
 \end{itemize}
+
+\subsubsection{Issue Stage}
+
+
 
 
 \subsection{Understanding Spike \& Verilator}
