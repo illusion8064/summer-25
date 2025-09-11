@@ -1,0 +1,10 @@
+# Ignore all files in Report folder
+Report/*
+
+# But keep .tex and .pdf files
+!Report/*.tex
+!Report/*.pdf
+
+# Also keep the Images folder and its contents
+!Report/Images/
+!Report/Images/*
